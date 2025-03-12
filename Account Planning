@@ -1,0 +1,52 @@
+class Account:
+    def __init__(self,name='',SSN='',email='',home_address='',phone_number='', account_type=''):
+        self.name = name
+        self.SSN = SSN
+        self.email = email
+        self.home_address = home_address
+        self.phone_number = phone_number
+        self.account_type = account_type
+    def choosing_account_type(self): 
+            account_types = [
+            'Junior Account', 
+            'Adult Account',
+            'Joint Account'
+            ]
+            for index, category in enumerate(account_types):
+                print(f"{index + 1}. {category}")
+            while True: 
+                try:
+                    self.account_type = int(input('What type of account would you like ?'))
+                except ValueError:
+                   print('Only Enter Numbers')
+                if 1<= self.account_type <= 3:
+                    print(f'{account_types[self.account_type - 1]}')
+                return account_types[self.account_type - 1]
+                   
+            
+    def gather_info(self):
+        self.account_type = self.choosing_account_type()
+        self.name = input('What is the name of the account holder?').strip().lower()
+        while True:
+            try:
+                self.SSN = int(input(f"What is {self.name}'s Social Security Number?"))
+                self.phone_number = int(input(f"What is {self.name}'s phone number?"))
+                break
+            except ValueError:
+                print('Only Enter Numbers for the SSN and Phone Number Field')
+        self.email = input(f"What is {self.name}'s email adress?").strip().lower()
+        self.home_address = input(f"What is {self.name}'s home address?").strip().lower()
+    def display_account_info(self):
+        print(
+            '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'
+            f"Account Holder: {self.name}\n"
+            f"Account Email: {self.email}\n"
+            f"Account Phone Number: {self.phone_number}\n"
+            f"Account Social Security: {self.SSN}\n"
+            f"Account Address: {self.home_address}\n"
+            '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+        )
+
+account = Account()
+account.gather_info()
+account.display_account_info()
